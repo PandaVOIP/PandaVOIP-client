@@ -5,6 +5,9 @@
 #include <QAudioInput>
 #include <QAudioOutput>
 #include <QBuffer>
+#include <QListWidget>
+#include <QString>
+#include "voipcontroller.h"
 
 namespace Ui{
     class PandaVOIP;
@@ -19,11 +22,14 @@ class PandaVOIP : public QMainWindow{
 
     public slots:
         void on_message_box_returned();
+        void updateVoiceUsers(std::vector<QString>);
 
     private:
-        Ui::PandaVOIP *ui;
-
         void setup_PandaVOIP();
+
+        Ui::PandaVOIP *ui;
+        QListWidget* general_list;
+        VoipController* voipController;
 };
 
 #endif // PandaVOIP_H

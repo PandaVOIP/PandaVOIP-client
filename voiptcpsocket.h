@@ -5,17 +5,21 @@
 #include <QString>
 #include <QObject>
 
+#include "voipcontroller.h"
+
 class VoipTCPSocket : public QObject
 {
     Q_OBJECT
 public:
-    VoipTCPSocket(QString, quint16, int);
+    VoipTCPSocket(VoipController*, QString, quint16, int);
     void connect_to_voice();
+    void disconnect_from_voice();
 public slots:
     void read_data();
 private:
     void send_data(char *, int);
 
+    VoipController* controller;
     QTcpSocket* tcp_socket;
     QString ip;
     quint16 port;

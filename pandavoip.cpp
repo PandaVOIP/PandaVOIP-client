@@ -16,18 +16,20 @@ PandaVOIP::~PandaVOIP(){
 }
 
 void PandaVOIP::setup_PandaVOIP(){
+    cout << "lol" << endl;
+    this->voipController = new VoipController(this);
+
+    this->voipController->controlConnect();
+
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
     QPushButton* general_label = new QPushButton(this->ui->voice_channels);
     general_label->setText("General");
     this->ui->verticalLayout->addWidget(general_label);
 
+    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 
-    QListWidget* general_list = new QListWidget(this->ui->voice_channels);
+    general_list = new QListWidget(this->ui->voice_channels);
     general_list->setSelectionMode(QAbstractItemView::NoSelection);
-
-    general_list->addItem("ritlew");
-    general_list->addItem("Slygga");
-    general_list->addItem("Aoushtan");
 
     this->ui->verticalLayout->addWidget(general_list);
 }
@@ -63,4 +65,14 @@ void PandaVOIP::on_message_box_returned(){
 
     // Clear message box
     this->ui->message_box->clear();
+}
+
+void PandaVOIP::updateVoiceUsers(vector<QString> clients){
+    int i;
+    for (i = general_list->count(); i > 0; i--){
+        general_list->takeItem(0);
+    }
+    for(i = 0; (unsigned int)i < clients.size(); i++){
+        general_list->addItem(clients[i]);
+    }
 }

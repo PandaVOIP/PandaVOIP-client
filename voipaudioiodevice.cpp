@@ -9,36 +9,20 @@
 using namespace std;
 
 VoipAudioIODevice::VoipAudioIODevice(QObject *parent): QIODevice(parent){
-    this->loadOrCreateClientId();
-    voice_conn = new VoipUDPSocket("73.161.137.88", 50038);
-    command_conn = new VoipTCPSocket("73.161.137.88", 50039, client_id);
     encoder = new OpusVoiceEncoder;
-
-    command_conn->connect_to_voice();
-    connect(this->voice_conn, SIGNAL(voice_ready(int, unsigned char *, int)), this, SLOT(read_socket(int, unsigned char*, int)));
+    this->voice_conn = NULL;
+    this->clientID = 0;
 
     return;
 }
 
-void VoipAudioIODevice::loadOrCreateClientId(){
-    FILE * client_file = fopen("client.txt", "w+");
-    if (ftell(client_file) == 0){
-        srand(time(NULL));
-        client_id = (rand() * RAND_MAX) % 100000000;
-        fprintf(client_file, "%d", client_id);
-    } else {
-        fscanf(client_file, "%1d", &client_id);
-    }
-    cout << client_id << endl;
-    fclose(client_file);
+void VoipAudioIODevice::setClientId(int clientID){
+    this->clientID = clientID;
 }
 
-void VoipAudioIODevice::setOutput(QIODevice* outputIODevice){
-    outputBuffer = outputIODevice;
-}
-
-void VoipAudioIODevice::setDevice(QAudioOutput * outputDevice){
-    this->outputDevice = outputDevice;
+void VoipAudioIODevice::setVoiceConn(VoipUDPSocket* voice_conn){
+    this->voice_conn = voice_conn;
+    connect(this->voice_conn, SIGNAL(voice_ready(int, unsigned char *, int)), this, SLOT(read_socket(int, unsigned char*, int)));
 }
 
 // Implementation required for this pure virtual function
@@ -49,6 +33,10 @@ qint64 VoipAudioIODevice::readData(char *data, qint64 max_size){
 }
 
 qint64 VoipAudioIODevice::writeData(const char *data, qint64 max_size){
+    if (voice_conn == NULL || this->clientID == 0){
+        return max_size;
+    }
+
     short *buf = (short *)data;
 
     int i;
@@ -71,7 +59,7 @@ qint64 VoipAudioIODevice::writeData(const char *data, qint64 max_size){
     unsigned char* spxOut;
     int spxOutSize;
     encoder->encode((unsigned char *)data, max_size, &spxOut, &spxOutSize);
-    voice_conn->send_voice(client_id, spxOut, spxOutSize);
+    voice_conn->send_voice(clientID, spxOut, spxOutSize);
     return max_size;
 }
 

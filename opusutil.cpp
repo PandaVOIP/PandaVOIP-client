@@ -23,10 +23,9 @@ OpusUtil::OpusUtil(){
 }
 \
 OpusVoiceEncoder::OpusVoiceEncoder(){
-    int err;
     encoder = (OpusEncoder *)malloc(opus_encoder_get_size(CHANNELS));
-    err = opus_encoder_init(encoder, SAMPLE_RATE, CHANNELS, APPLICATION);
-    err = opus_encoder_ctl(encoder, OPUS_SET_BITRATE(BITRATE));
+    opus_encoder_init(encoder, SAMPLE_RATE, CHANNELS, APPLICATION);
+    opus_encoder_ctl(encoder, OPUS_SET_BITRATE(BITRATE));
 }
 
 OpusVoiceEncoder::encode(unsigned char* wavData, int wavLength, unsigned char** opusAudio, int* opusLength){
@@ -36,7 +35,6 @@ OpusVoiceEncoder::encode(unsigned char* wavData, int wavLength, unsigned char** 
     unsigned char cbits[MAX_PACKET_SIZE];
     int nbBytes;
 
-    int err;
     int i;
 
     // size in bytes of the raw wav audio data
@@ -77,9 +75,9 @@ OpusVoiceEncoder::encode(unsigned char* wavData, int wavLength, unsigned char** 
 
 OpusVoiceDecoder::OpusVoiceDecoder(int id){
     this->id = id;
-    int err;
+
     decoder = (OpusDecoder *)malloc(opus_decoder_get_size(CHANNELS));
-    err = opus_decoder_init(decoder, SAMPLE_RATE, CHANNELS);
+    opus_decoder_init(decoder, SAMPLE_RATE, CHANNELS);
 
     QAudioFormat format;
     format.setSampleRate(48000);

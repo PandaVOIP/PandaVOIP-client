@@ -19,7 +19,6 @@ void VoipUDPSocket::read_data(){
     QHostAddress dummy_addr;
     quint16 dummy_port;
     spx_length = this->udp_socket->readDatagram((char *)spx_buffer, 32000*4, &dummy_addr, &dummy_port);
-    int wav_length;
 
     int sender_id;
     memcpy(&sender_id, spx_buffer, sizeof(sender_id));

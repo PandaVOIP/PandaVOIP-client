@@ -17,8 +17,8 @@ class VoipAudioIODevice: public QIODevice
     Q_OBJECT
 public:
     explicit VoipAudioIODevice(QObject *parent = 0);
-    void setOutput(QIODevice*);
-    void setDevice(QAudioOutput*);
+    void setVoiceConn(VoipUDPSocket*);
+    void setClientId(int);
 public slots:
     void read_socket(int, unsigned char *, int);
 protected:
@@ -32,13 +32,11 @@ private:
     VoipUDPSocket* voice_conn;
     VoipTCPSocket* command_conn;
     std::queue <unsigned char*> wavQueue;
-    QIODevice* outputBuffer;
-    QAudioOutput* outputDevice;
     OpusVoiceEncoder* encoder;
     std::vector<OpusVoiceDecoder*> decoders;
 
     int timer;
-    int client_id;
+    int clientID;
 };
 
 #endif // VOIPAUDIOIODEVICE_H

@@ -30,7 +30,8 @@ SOURCES += \
     opusutil.cpp \
     voipaudioiodevice.cpp \
     voiptcpsocket.cpp \
-    voipudpsocket.cpp
+    voipudpsocket.cpp \
+    voipcontroller.cpp
 
 HEADERS += \
     messagebox.h \
@@ -38,7 +39,8 @@ HEADERS += \
     opusutil.h \
     voipaudioiodevice.h \
     voiptcpsocket.h \
-    voipudpsocket.h
+    voipudpsocket.h \
+    voipcontroller.h
 
 FORMS += \
     pandavoip.ui

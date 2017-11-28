@@ -7,8 +7,9 @@ using namespace std;
 
 #define BUFFER_SIZE 1024
 
-VoipTCPSocket::VoipTCPSocket(QString ip, quint16 port, int client_id)
+VoipTCPSocket::VoipTCPSocket(VoipController* controller, QString ip, quint16 port, int client_id)
 {
+    this->controller = controller;
     this->tcp_socket = new QTcpSocket;
     this->ip = ip;
     this->port = port;
@@ -40,10 +41,19 @@ void VoipTCPSocket::read_data(){
 
     int bytes_read = tcp_socket->read(buffer, BUFFER_SIZE);
     buffer[bytes_read] = '\0';
+
+    if (strncmp(buffer, "users ", 6) == 0){
+        controller->updateVoiceUsers(buffer + 6);
+    }
     cout << buffer << endl;
 }
 
 void VoipTCPSocket::connect_to_voice(){
-    char * message = "voice connect";
+    char * message = (char *)"voice connect";
+    this->send_data(message, strlen(message));
+}
+
+void VoipTCPSocket::disconnect_from_voice(){
+    char * message = (char*)"voice disconnect";
     this->send_data(message, strlen(message));
 }
