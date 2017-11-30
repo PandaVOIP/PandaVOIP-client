@@ -1,6 +1,8 @@
 #include <QIODevice>
 #include <QAudioFormat>
 #include <QString>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include <vector>
 #include <stdlib.h>
@@ -38,7 +40,6 @@ VoipController::VoipController(PandaVOIP* gui){
     audioInput = new QAudioInput(format);
 
     audioInput->start(voipIO);
-
 }
 
 void VoipController::loadOrCreateClientId(){
@@ -64,17 +65,8 @@ bool VoipController::controlConnect(){
     return true;
 }
 
-void VoipController::receive_text_message(char * message){
-    char user[9];
-    char text_message[strlen(message) - 8];
-
-    strncpy(user, message, 8);
-    user[8] = '\0';
-
-    strncpy(text_message, message+8, strlen(message) - 8);
-    text_message[strlen(message) - 8] = '\0';
-
-    this->gui->new_message(QString(user), QString(text_message));
+void VoipController::receive_text_message(QJsonObject data){
+    this->gui->new_message(data["message"].toObject()["sender_id"].toString(), data["message"].toObject()["text"].toString());
 }
 
 bool VoipController::send_text_message(QString message){
@@ -82,11 +74,16 @@ bool VoipController::send_text_message(QString message){
         return false;
     }
 
-    command_conn->send_text_message((char *)message.toStdString().c_str());
+    QJsonObject json_message{
+        {"command", "text message"},
+        {"message", message}
+    };
+
+    command_conn->send_command(json_message);
     return true;
 }
 
-bool VoipController::connectVoice(){
+bool VoipController::connectVoice(){   
     if (command_conn == NULL){
         return false;
     }
@@ -103,15 +100,17 @@ bool VoipController::connectVoice(){
     }
 }
 
-void VoipController::updateVoiceUsers(char * users_str){
+void VoipController::updateVoiceUsers(QJsonObject data){
     vector<QString> users;
     unsigned int i;
     char user[9];
 
-    for (i = 0; i < strlen(users_str); i += 8){
+    for (i = 0; i < data["users"].toArray().size(); i += 8){
+        /*
         strncpy(user, users_str + i, 8);
         user[8] = '\0';
         users.push_back(QString(user));
+        */
     }
     gui->updateVoiceUsers(users);
 

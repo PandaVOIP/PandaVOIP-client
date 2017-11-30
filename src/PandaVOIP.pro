@@ -45,9 +45,6 @@ HEADERS += \
 FORMS += \
     pandavoip.ui
 
-RESOURCES += \
-    resources.qrc
-
 DISTFILES += \
     images/profileimage.jpg
 
