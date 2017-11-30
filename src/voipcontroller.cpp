@@ -3,12 +3,19 @@
 #include <QString>
 
 #include <vector>
+#include <stdlib.h>
 #include <iostream>
 #include <time.h>
 
 #include "voipcontroller.h"
 
 using namespace std;
+
+#ifdef QT_DEBUG
+    #define SERVER_IP "127.0.0.1"
+#else
+    #define SERVER_IP "73.161.137.88"
+#endif
 
 VoipController::VoipController(PandaVOIP* gui){
     this->gui = gui;
@@ -53,7 +60,29 @@ void VoipController::loadOrCreateClientId(){
 }
 
 bool VoipController::controlConnect(){
-    command_conn = new VoipTCPSocket(this, "127.0.0.1", 50039, clientID);
+    command_conn = new VoipTCPSocket(this, SERVER_IP, 50039, clientID);
+    return true;
+}
+
+void VoipController::receive_text_message(char * message){
+    char user[9];
+    char text_message[strlen(message) - 8];
+
+    strncpy(user, message, 8);
+    user[8] = '\0';
+
+    strncpy(text_message, message+8, strlen(message) - 8);
+    text_message[strlen(message) - 8] = '\0';
+
+    this->gui->new_message(QString(user), QString(text_message));
+}
+
+bool VoipController::send_text_message(QString message){
+    if (command_conn == NULL){
+        return false;
+    }
+
+    command_conn->send_text_message((char *)message.toStdString().c_str());
     return true;
 }
 
@@ -63,7 +92,7 @@ bool VoipController::connectVoice(){
     }
     if (voice_conn == NULL){
         command_conn->connect_to_voice();
-        voice_conn = new VoipUDPSocket("127.0.0.1", 50038);
+        voice_conn = new VoipUDPSocket(SERVER_IP, 50038);
         voipIO->setVoiceConn(voice_conn);
         return true;
     } else {

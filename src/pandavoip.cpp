@@ -35,12 +35,18 @@ void PandaVOIP::setup_PandaVOIP(){
 }
 
 void PandaVOIP::on_message_box_returned(){
-    QString message = this->ui->message_box->toHtml();
-
     // Do nothing if there is no message to send
-    if(this->ui->message_box->toPlainText().length() == 0)
+    if(this->ui->message_box->toPlainText().length() == 0){
         return;
+    }
+    QString message = this->ui->message_box->toHtml();
+    // Clear message box
+    this->ui->message_box->clear();
 
+    this->voipController->send_text_message(message);
+}
+
+void PandaVOIP::new_message(QString username, QString message){
     // Get current position of the messages container
     QTextCursor cursor = this->ui->messages->textCursor();
     cursor.movePosition(QTextCursor::End);
@@ -57,14 +63,11 @@ void PandaVOIP::on_message_box_returned(){
 
     // Insert a new table to the end of the messages container
     QTextTable *new_message = cursor.insertTable(2, 1, table_format);
-    new_message->cellAt(0, 0).firstCursorPosition().insertText("Slygga:", username_format);
+    new_message->cellAt(0, 0).firstCursorPosition().insertText(username + ":", username_format);
     new_message->cellAt(1, 0).firstCursorPosition().insertHtml(message);
 
     // Set scroll bar to bottom
     this->ui->messages->verticalScrollBar()->setValue(this->ui->messages->verticalScrollBar()->maximum());
-
-    // Clear message box
-    this->ui->message_box->clear();
 }
 
 void PandaVOIP::updateVoiceUsers(vector<QString> clients){

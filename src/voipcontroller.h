@@ -16,6 +16,8 @@ class VoipController : public QObject
 public:
     VoipController(PandaVOIP*);
     bool controlConnect();
+    void receive_text_message(char *);
+    bool send_text_message(QString);
     void updateVoiceUsers(char *);
 
 public slots:

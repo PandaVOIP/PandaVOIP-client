@@ -17,8 +17,9 @@ class PandaVOIP : public QMainWindow{
     Q_OBJECT
 
     public:
-        explicit PandaVOIP(QWidget *parent = 0);
-        ~PandaVOIP();
+    explicit PandaVOIP(QWidget *parent = 0);
+    ~PandaVOIP();
+    void new_message(QString, QString);
 
     public slots:
         void on_message_box_returned();

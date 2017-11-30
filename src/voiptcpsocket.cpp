@@ -17,10 +17,26 @@ VoipTCPSocket::VoipTCPSocket(VoipController* controller, QString ip, quint16 por
 
     QHostAddress addr(this->ip);
 
+    connect(this->tcp_socket, SIGNAL(connected()), this, SLOT(tcp_connected()));
+    connect(this->tcp_socket, SIGNAL(disconnected()), this, SLOT(tcp_disconnected()));
+    connect(this->tcp_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(tcp_error(QAbstractSocket::SocketError)));
+
     this->tcp_socket->connectToHost(addr, this->port);
     connect(this->tcp_socket, SIGNAL(readyRead()), this, SLOT(read_data()));
     this->send_data((char *)0, 0);
     //this->tcp_socket->write((char*)&client_id, sizeof(client_id));
+
+}
+
+void VoipTCPSocket::tcp_connected(){
+
+}
+
+void VoipTCPSocket::tcp_disconnected(){
+
+}
+
+void VoipTCPSocket::tcp_error(QAbstractSocket::SocketError error){
 
 }
 
@@ -44,13 +60,22 @@ void VoipTCPSocket::read_data(){
 
     if (strncmp(buffer, "users ", 6) == 0){
         controller->updateVoiceUsers(buffer + 6);
+    } else if (strncmp(buffer, "text ", 5) == 0){
+        this->controller->receive_text_message(buffer + 5);
     }
-    cout << buffer << endl;
+    //cout << buffer << endl;
 }
 
 void VoipTCPSocket::connect_to_voice(){
     char * message = (char *)"voice connect";
     this->send_data(message, strlen(message));
+}
+
+void VoipTCPSocket::send_text_message(char * message){
+    char final[strlen(message) + 5];
+    strcpy(final, "text ");
+    strcat(final, message);
+    this->send_data(final, strlen(final));
 }
 
 void VoipTCPSocket::disconnect_from_voice(){
