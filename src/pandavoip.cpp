@@ -16,7 +16,6 @@ PandaVOIP::~PandaVOIP(){
 }
 
 void PandaVOIP::setup_PandaVOIP(){
-    cout << "lol" << endl;
     this->voipController = new VoipController(this);
 
     this->voipController->controlConnect();

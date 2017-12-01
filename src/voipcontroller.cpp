@@ -43,19 +43,6 @@ VoipController::VoipController(PandaVOIP* gui){
 }
 
 void VoipController::loadOrCreateClientId(){
-    /*
-    FILE * client_file = fopen("client.txt", "w+");
-    if (ftell(client_file) == 0){
-
-        client_id = (rand() * RAND_MAX) % 100000000;
-        fprintf(client_file, "%d", client_id);
-    } else {
-        fscanf(client_file, "%1d", &client_id);
-    }
-    cout << client_id << endl;
-    fclose(client_file);
-    */
-
     srand(time(NULL));
     clientID = (rand() * RAND_MAX) % 100000000;
 }

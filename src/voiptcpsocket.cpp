@@ -70,8 +70,6 @@ void VoipTCPSocket::read_data(){
     int bytes_read = tcp_socket->read(buffer, BUFFER_SIZE);
     buffer[bytes_read] = '\0';
 
-    cout << buffer << endl;
-
     QJsonDocument doc = QJsonDocument::fromJson(QString(buffer).toUtf8());
     QJsonObject response = doc.object();
 
