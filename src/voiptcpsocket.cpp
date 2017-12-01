@@ -65,9 +65,14 @@ void VoipTCPSocket::send_data(QJsonObject json_data){
 }
 
 void VoipTCPSocket::read_data(){
+    char read_size[11];
     char buffer[BUFFER_SIZE];
-
-    int bytes_read = tcp_socket->read(buffer, BUFFER_SIZE);
+    if (tcp_socket->bytesAvailable() <= 10){
+        return;
+    }
+    int bytes_read = tcp_socket->read(read_size, 10);
+    read_size[10] = '\0';
+    bytes_read = tcp_socket->read(buffer, atoi(read_size));
     buffer[bytes_read] = '\0';
 
     QJsonDocument doc = QJsonDocument::fromJson(QString(buffer).toUtf8());
@@ -75,10 +80,15 @@ void VoipTCPSocket::read_data(){
 
     QString command = response["command"].toString();
 
+    cout << command.toStdString() << endl;
+
     if (QString::compare(command, "update_voice_users") == 0){
         controller->updateVoiceUsers(response);
     } else if (QString::compare(command, "new_message") == 0){
         controller->receive_text_message(response);
+    }
+    if (tcp_socket->bytesAvailable()){
+        this->read_data();
     }
 }
 

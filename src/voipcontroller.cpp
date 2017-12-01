@@ -81,6 +81,7 @@ bool VoipController::connectVoice(){
         return true;
     } else {
         command_conn->disconnect_from_voice();
+        delete voice_conn;
         voice_conn = NULL;
         voipIO->setVoiceConn(voice_conn);
         return true;
@@ -89,15 +90,12 @@ bool VoipController::connectVoice(){
 
 void VoipController::updateVoiceUsers(QJsonObject data){
     vector<QString> users;
-    unsigned int i;
-    char user[9];
+    int i;
 
-    for (i = 0; i < data["users"].toArray().size(); i += 8){
-        /*
-        strncpy(user, users_str + i, 8);
-        user[8] = '\0';
-        users.push_back(QString(user));
-        */
+    QJsonArray json_users(data["users"].toArray());
+
+    for (i = 0; i < json_users.size(); i++){
+        users.push_back(json_users.at(i).toString());
     }
     gui->updateVoiceUsers(users);
 
