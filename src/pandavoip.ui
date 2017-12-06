@@ -23,6 +23,12 @@
    <string notr="true">background-color: rgb(77, 77, 77)</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
@@ -81,7 +87,7 @@
 	padding: 5px;
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="left_section">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -112,13 +118,13 @@
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
+           <verstretch>1</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>0</height>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
@@ -161,7 +167,7 @@
 
 </string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="voiceLayout">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -182,12 +188,69 @@
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="chat_channels">
-         <item>
-          <property name="text">
-           <string>General</string>
+        <widget class="QWidget" name="chat_channels" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#chat_channels {
+	background-color: rgb(239, 239, 239);
+}
+
+.QPushButton{
+	font: 12pt &quot;Segoe UI&quot;;
+	color: #2a2a2a;
+	background-color: none;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 5px;
+	text-align: left;
+	border: none;
+	margin-left: 10%;
+	margin-top: 5px;
+	margin-right: 10%; 
+}
+
+.QPushButton:hover {
+	background-color: #6adede;
+	color: white;
+}
+
+.QListWidget {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 20%;
+	margin-left: 10%;
+	margin-right: 10%; 
+}
+</string>
+         </property>
+         <layout class="QVBoxLayout" name="chatLayout">
+          <property name="spacing">
+           <number>0</number>
           </property>
-         </item>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
         </widget>
        </item>
       </layout>

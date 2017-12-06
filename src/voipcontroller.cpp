@@ -88,6 +88,18 @@ bool VoipController::connectVoice(){
     }
 }
 
+void VoipController::updateChatUsers(QJsonObject data){
+    vector<QString> users;
+    int i;
+
+    QJsonArray json_users(data["users"].toArray());
+
+    for (i = 0; i < json_users.size(); i++){
+        users.push_back(json_users.at(i).toString());
+    }
+    gui->updateChatUsers(users);
+}
+
 void VoipController::updateVoiceUsers(QJsonObject data){
     vector<QString> users;
     int i;

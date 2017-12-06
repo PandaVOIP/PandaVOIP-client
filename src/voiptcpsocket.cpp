@@ -84,6 +84,8 @@ void VoipTCPSocket::read_data(){
 
     if (QString::compare(command, "update_voice_users") == 0){
         controller->updateVoiceUsers(response);
+    } else if (QString::compare(command, "update_chat_users") == 0){
+        controller->updateChatUsers(response);
     } else if (QString::compare(command, "new_message") == 0){
         controller->receive_text_message(response);
     }

@@ -18,6 +18,7 @@ public:
     bool controlConnect();
     void receive_text_message(QJsonObject);
     bool send_text_message(QString);
+    void updateChatUsers(QJsonObject);
     void updateVoiceUsers(QJsonObject);
 
 public slots:

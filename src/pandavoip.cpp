@@ -21,16 +21,28 @@ void PandaVOIP::setup_PandaVOIP(){
     this->voipController->controlConnect();
 
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
-    QPushButton* general_label = new QPushButton(this->ui->voice_channels);
-    general_label->setText("General");
-    this->ui->verticalLayout->addWidget(general_label);
 
-    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
+    // voice area
+    QPushButton* general_voice_label = new QPushButton(this->ui->voice_channels);
+    general_voice_label->setText("General");
+    this->ui->voiceLayout->addWidget(general_voice_label);
 
-    general_list = new QListWidget(this->ui->voice_channels);
-    general_list->setSelectionMode(QAbstractItemView::NoSelection);
+    connect(general_voice_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 
-    this->ui->verticalLayout->addWidget(general_list);
+    general_voice_list = new QListWidget(this->ui->voice_channels);
+    general_voice_list->setSelectionMode(QAbstractItemView::NoSelection);
+
+    this->ui->voiceLayout->addWidget(general_voice_list);
+
+    // text users area
+    QPushButton* general_chat_label = new QPushButton(this->ui->voice_channels);
+    general_chat_label->setText("General");
+    this->ui->chatLayout->addWidget(general_chat_label);
+
+    general_chat_list = new QListWidget(this->ui->voice_channels);
+    general_chat_list->setSelectionMode(QAbstractItemView::NoSelection);
+
+    this->ui->chatLayout->addWidget(general_chat_list);
 }
 
 void PandaVOIP::on_message_box_returned(){
@@ -69,12 +81,22 @@ void PandaVOIP::new_message(QString username, QString message){
     this->ui->messages->verticalScrollBar()->setValue(this->ui->messages->verticalScrollBar()->maximum());
 }
 
-void PandaVOIP::updateVoiceUsers(vector<QString> clients){
+void PandaVOIP::updateChatUsers(vector<QString> clients){
     int i;
-    for (i = general_list->count(); i > 0; i--){
-        general_list->takeItem(0);
+    for (i = general_chat_list->count(); i > 0; i--){
+        general_chat_list->takeItem(0);
     }
     for(i = 0; (unsigned int)i < clients.size(); i++){
-        general_list->addItem(clients[i]);
+        general_chat_list->addItem(clients[i]);
+    }
+}
+
+void PandaVOIP::updateVoiceUsers(vector<QString> clients){
+    int i;
+    for (i = general_voice_list->count(); i > 0; i--){
+        general_voice_list->takeItem(0);
+    }
+    for(i = 0; (unsigned int)i < clients.size(); i++){
+        general_voice_list->addItem(clients[i]);
     }
 }
