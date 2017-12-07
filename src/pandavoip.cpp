@@ -23,18 +23,22 @@ void PandaVOIP::setup_PandaVOIP(){
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
 
     // voice area
+    // label for voice channel
     QPushButton* general_voice_label = new QPushButton(this->ui->voice_channels);
     general_voice_label->setText("General");
     this->ui->voiceLayout->addWidget(general_voice_label);
 
+    // connect to voice when the channel button is clicked
     connect(general_voice_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 
+    // list that will be populated when users connect
     general_voice_list = new QListWidget(this->ui->voice_channels);
     general_voice_list->setSelectionMode(QAbstractItemView::NoSelection);
 
     this->ui->voiceLayout->addWidget(general_voice_list);
 
     // text users area
+    // same as above documentation
     QPushButton* general_chat_label = new QPushButton(this->ui->voice_channels);
     general_chat_label->setText("General");
     this->ui->chatLayout->addWidget(general_chat_label);
@@ -83,9 +87,11 @@ void PandaVOIP::new_message(QString username, QString message){
 
 void PandaVOIP::updateChatUsers(vector<QString> clients){
     int i;
+    // remove all elements from list
     for (i = general_chat_list->count(); i > 0; i--){
         general_chat_list->takeItem(0);
     }
+    // add all updated users to list
     for(i = 0; (unsigned int)i < clients.size(); i++){
         general_chat_list->addItem(clients[i]);
     }
@@ -93,9 +99,11 @@ void PandaVOIP::updateChatUsers(vector<QString> clients){
 
 void PandaVOIP::updateVoiceUsers(vector<QString> clients){
     int i;
+    // remove all elements from list
     for (i = general_voice_list->count(); i > 0; i--){
         general_voice_list->takeItem(0);
     }
+    // add all updated users to list
     for(i = 0; (unsigned int)i < clients.size(); i++){
         general_voice_list->addItem(clients[i]);
     }
