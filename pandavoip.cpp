@@ -17,31 +17,32 @@ PandaVOIP::~PandaVOIP(){
 }
 
 void PandaVOIP::setup_PandaVOIP(){
-    cout << "lol" << endl;
+    // Voip
     this->voipController = new VoipController(this);
-
     this->voipController->controlConnect();
 
-    connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
-    connect(ui->action_settings, &QAction::triggered, this, &PandaVOIP::on_action_settings_clicked);
-
+    // Should we move this to a function?
     QPushButton* general_label = new QPushButton(this->ui->voice_channels);
     general_label->setText("General");
     this->ui->verticalLayout->addWidget(general_label);
-
-    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 
     general_list = new QListWidget(this->ui->voice_channels);
     general_list->setSelectionMode(QAbstractItemView::NoSelection);
 
     this->ui->verticalLayout->addWidget(general_list);
 
+    // Login popup... duh. Should add checks if this is necessary in the future
     login_popup();
+
+    // Connect all signals at the end
+    connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
+    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
+    connect(ui->action_settings, &QAction::triggered, this, &PandaVOIP::on_action_settings_clicked);
 }
 
 void PandaVOIP::login_popup(){
     account = new Account(this->parentWidget());
-    account->setWindowFlag(Qt::WindowStaysOnTopHint);
+    account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     account->show();
 }
 
