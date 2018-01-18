@@ -74,11 +74,28 @@ QAction{
 	background-color: rgb(50, 50, 50);
 }
 
-#close{
-	font-size: 18px;
+#settings{
+	font-size: 12px;
 	border: none;
 	background-color: none;
 	color: white;
+	padding: 5px 10px;
+}
+
+#settings:hover{
+	background-color: #6adede;
+}
+
+#close{
+	font-size: 14px;
+	border: none;
+	background-color: none;
+	color: white;
+	padding: 5px 20px;
+}
+
+#close:hover{
+	background-color: rgb(255, 55, 55);
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -101,9 +118,14 @@ QAction{
         <widget class="QPushButton" name="settings">
          <property name="maximumSize">
           <size>
-           <width>50</width>
+           <width>80</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>Settings</string>
@@ -114,6 +136,9 @@ QAction{
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -127,7 +152,7 @@ QAction{
         <widget class="QPushButton" name="close">
          <property name="maximumSize">
           <size>
-           <width>20</width>
+           <width>30</width>
            <height>16777215</height>
           </size>
          </property>
@@ -450,11 +475,6 @@ QAction{
     </item>
    </layout>
   </widget>
-  <action name="settings_2">
-   <property name="text">
-    <string>settings</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

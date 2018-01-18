@@ -38,7 +38,8 @@ void PandaVOIP::setup_PandaVOIP(){
     // Connect all signals at the end
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
     connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
-    connect(ui->action_settings, &QAction::triggered, this, &PandaVOIP::on_action_settings_clicked);
+    connect(ui->settings, &QPushButton::toggled, this, &PandaVOIP::on_settings_clicked);
+    connect(ui->close, &QPushButton::toggled, this, &PandaVOIP::on_close_clicked);
 }
 
 void PandaVOIP::login_popup(){
@@ -60,9 +61,23 @@ void PandaVOIP::on_message_box_returned(){
 
 }
 
-void PandaVOIP::on_action_settings_clicked(){
+void PandaVOIP::on_settings_clicked(){
     settings = new Settings(this->parentWidget());
     settings->show();
+}
+
+void PandaVOIP::on_close_clicked(){
+    if(account != NULL){
+        account->close();
+        delete account;
+    }
+
+    if(settings != NULL){
+        settings->close();
+        delete settings;
+    }
+
+    this->close();
 }
 
 void PandaVOIP::new_message(QString username, QString message){
