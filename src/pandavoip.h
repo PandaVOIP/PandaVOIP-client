@@ -25,7 +25,8 @@ class PandaVOIP : public QMainWindow{
 
     public slots:
         void on_message_box_returned();
-        void on_action_settings_clicked();
+        void on_settings_clicked();
+        void on_close_clicked();
         void updateVoiceUsers(std::vector<QString>);
 
     private:
