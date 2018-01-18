@@ -1,5 +1,6 @@
 #include "pandavoip.h"
 #include "ui_pandavoip.h"
+#include "settings.h"
 #include <iostream>
 #include <QScrollBar>
 #include <QTextTable>
@@ -16,37 +17,34 @@ PandaVOIP::~PandaVOIP(){
 }
 
 void PandaVOIP::setup_PandaVOIP(){
+    // Voip
     this->voipController = new VoipController(this);
-
     this->voipController->controlConnect();
 
+
+    // Should we move this to a function?
+    QPushButton* general_label = new QPushButton(this->ui->voice_channels);
+    general_label->setText("General");
+    this->ui->verticalLayout->addWidget(general_label);
+
+    general_list = new QListWidget(this->ui->voice_channels);
+    general_list->setSelectionMode(QAbstractItemView::NoSelection);
+
+    this->ui->verticalLayout->addWidget(general_list);
+
+    // Login popup... duh. Should add checks if this is necessary in the future
+    login_popup();
+
+    // Connect all signals at the end
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
+    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
+    connect(ui->action_settings, &QAction::triggered, this, &PandaVOIP::on_action_settings_clicked);
+}
 
-    // voice area
-    // label for voice channel
-    QPushButton* general_voice_label = new QPushButton(this->ui->voice_channels);
-    general_voice_label->setText("General");
-    this->ui->voiceLayout->addWidget(general_voice_label);
-
-    // connect to voice when the channel button is clicked
-    connect(general_voice_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
-
-    // list that will be populated when users connect
-    general_voice_list = new QListWidget(this->ui->voice_channels);
-    general_voice_list->setSelectionMode(QAbstractItemView::NoSelection);
-
-    this->ui->voiceLayout->addWidget(general_voice_list);
-
-    // text users area
-    // same as above documentation
-    QPushButton* general_chat_label = new QPushButton(this->ui->voice_channels);
-    general_chat_label->setText("General");
-    this->ui->chatLayout->addWidget(general_chat_label);
-
-    general_chat_list = new QListWidget(this->ui->voice_channels);
-    general_chat_list->setSelectionMode(QAbstractItemView::NoSelection);
-
-    this->ui->chatLayout->addWidget(general_chat_list);
+void PandaVOIP::login_popup(){
+    account = new Account(this->parentWidget());
+    account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    account->show();
 }
 
 void PandaVOIP::on_message_box_returned(){
@@ -59,6 +57,12 @@ void PandaVOIP::on_message_box_returned(){
     this->ui->message_box->clear();
 
     this->voipController->send_text_message(message);
+
+}
+
+void PandaVOIP::on_action_settings_clicked(){
+    settings = new Settings(this->parentWidget());
+    settings->show();
 }
 
 void PandaVOIP::new_message(QString username, QString message){

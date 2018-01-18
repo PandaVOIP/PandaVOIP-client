@@ -31,7 +31,9 @@ SOURCES += \
     voipaudioiodevice.cpp \
     voiptcpsocket.cpp \
     voipudpsocket.cpp \
-    voipcontroller.cpp
+    voipcontroller.cpp \
+    settings.cpp \
+    account.cpp
 
 HEADERS += \
     messagebox.h \
@@ -40,10 +42,14 @@ HEADERS += \
     voipaudioiodevice.h \
     voiptcpsocket.h \
     voipudpsocket.h \
-    voipcontroller.h
+    voipcontroller.h \
+    settings.h \
+    account.h
 
 FORMS += \
-    pandavoip.ui
+    pandavoip.ui \
+    settings.ui \
+    account.ui
 
 DISTFILES += \
     images/profileimage.jpg
