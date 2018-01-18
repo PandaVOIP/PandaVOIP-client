@@ -68,7 +68,7 @@ QAction{
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <widget class="QWidget" name="menu" native="true">
+     <widget class="Menu" name="menu" native="true">
       <property name="styleSheet">
        <string notr="true">#menu{
 	background-color: rgb(50, 50, 50);
@@ -482,6 +482,12 @@ QAction{
    <class>MessageBox</class>
    <extends>QTextEdit</extends>
    <header>messagebox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Menu</class>
+   <extends>QWidget</extends>
+   <header>menu.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
