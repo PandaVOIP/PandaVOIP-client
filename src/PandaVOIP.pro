@@ -33,7 +33,8 @@ SOURCES += \
     voipudpsocket.cpp \
     voipcontroller.cpp \
     settings.cpp \
-    account.cpp
+    account.cpp \
+    menu.cpp
 
 HEADERS += \
     messagebox.h \
@@ -44,7 +45,8 @@ HEADERS += \
     voipudpsocket.h \
     voipcontroller.h \
     settings.h \
-    account.h
+    account.h \
+    menu.h
 
 FORMS += \
     pandavoip.ui \
