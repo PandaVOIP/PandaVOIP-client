@@ -37,7 +37,7 @@ void VoipTCPSocket::tcp_disconnected(){
 }
 
 void VoipTCPSocket::tcp_error(QAbstractSocket::SocketError error){
-
+    cout << error << endl;
 }
 
 void VoipTCPSocket::send_data(char* send_data, int length){
