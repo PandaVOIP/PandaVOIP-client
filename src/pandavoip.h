@@ -36,8 +36,8 @@ class PandaVOIP : public QMainWindow{
         Ui::PandaVOIP *ui;
         QListWidget* general_list;
         VoipController* voipController;
-        Account *account;
-        Settings *settings;
+        Account *account = NULL;
+        Settings *settings = NULL;
 };
 
 #endif // PandaVOIP_H
