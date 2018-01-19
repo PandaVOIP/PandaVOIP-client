@@ -1,9 +1,18 @@
 #include "menu.h"
 #include <QWidget>
 #include <QMouseEvent>
+#include <QPainter>
+#include <QStyleOption>
 
 Menu::Menu(QWidget *parent) : QWidget(parent){
     this->parent = parent;
+}
+
+void Menu::paintEvent(QPaintEvent *){
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
 void Menu::mousePressEvent(QMouseEvent *e){

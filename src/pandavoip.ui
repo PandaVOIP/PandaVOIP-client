@@ -20,25 +20,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">*{
-	background-color: rgb(77, 77, 77);
-}
-
-QMenuBar{
-	font-size: 13px;
-	background-color: rgb(50, 70, 100);
-	color: white;
-}
-
-QMenu:hover{
-	background-color: #6adede;
-}
-
-QAction{
-	font-size: 13px;
-	background-color: inherit;
-	color: white;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -52,7 +34,13 @@ QAction{
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">#main_menu{
+	background-color: rgb(50, 50, 50);
+}
+
+#main_widget{
+	background-color: rgb(70, 70, 70);
+}</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
@@ -67,14 +55,13 @@ QAction{
     <property name="bottomMargin">
      <number>0</number>
     </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
-     <widget class="Menu" name="menu" native="true">
+     <widget class="Menu" name="main_menu" native="true">
       <property name="styleSheet">
-       <string notr="true">#menu{
-	background-color: rgb(50, 50, 50);
-}
-
-#settings{
+       <string notr="true">#settings{
 	font-size: 12px;
 	border: none;
 	background-color: none;

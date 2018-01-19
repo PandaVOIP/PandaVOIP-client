@@ -38,8 +38,8 @@ class PandaVOIP : public QMainWindow{
         QListWidget* general_chat_list;
         QListWidget* general_voice_list;
         VoipController* voipController;
-        Account *account;
-        Settings *settings;
+        Account *account = NULL;
+        Settings *settings = NULL;
 };
 
 #endif // PandaVOIP_H

@@ -36,14 +36,14 @@ void PandaVOIP::setup_PandaVOIP(){
     login_popup();
 
     // Connect all signals at the end
-    connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
-    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
     connect(ui->settings, &QPushButton::toggled, this, &PandaVOIP::on_settings_clicked);
     connect(ui->close, &QPushButton::toggled, this, &PandaVOIP::on_close_clicked);
+    connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
+    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 }
 
 void PandaVOIP::login_popup(){
-    account = new Account(this->parentWidget());
+    account = new Account(NULL);
     account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     account->show();
 }
@@ -58,26 +58,16 @@ void PandaVOIP::on_message_box_returned(){
     this->ui->message_box->clear();
 
     this->voipController->send_text_message(message);
-
 }
 
 void PandaVOIP::on_settings_clicked(){
-    settings = new Settings(this->parentWidget());
+    settings = new Settings(NULL);
+    settings->setAttribute(Qt::WA_DeleteOnClose);
     settings->show();
 }
 
 void PandaVOIP::on_close_clicked(){
-    if(account != NULL){
-        account->close();
-        delete account;
-    }
-
-    if(settings != NULL){
-        settings->close();
-        delete settings;
-    }
-
-    this->close();
+    QApplication::quit();
 }
 
 void PandaVOIP::new_message(QString username, QString message){
