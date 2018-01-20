@@ -67,6 +67,7 @@ void PandaVOIP::create_server_node(){
 }
 
 void PandaVOIP::login_popup(){
+    // Needs to be redone; NULL parent doesn't get automatically deallocated by Q_OBJECT
     account = new Account(NULL);
     account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     account->show();
@@ -74,9 +75,9 @@ void PandaVOIP::login_popup(){
 
 void PandaVOIP::on_message_box_returned(){
     // Do nothing if there is no message to send
-    if(this->ui->message_box->toPlainText().length() == 0){
+    if (this->ui->message_box->toPlainText().length() == 0)
         return;
-    }
+
     QString message = this->ui->message_box->toHtml();
     // Clear message box
     this->ui->message_box->clear();
@@ -95,12 +96,10 @@ void PandaVOIP::on_close_clicked(){
 }
 
 void PandaVOIP::on_maximize_clicked(){
-    if(QMainWindow::windowState() == Qt::WindowMaximized){
+    if (QMainWindow::windowState() == Qt::WindowMaximized)
         QMainWindow::showNormal();
-    }
-    else{
+    else
         QMainWindow::showMaximized();
-    }
 }
 
 void PandaVOIP::on_minimize_clicked(){
@@ -133,10 +132,8 @@ void PandaVOIP::new_message(QString username, QString message){
 
 void PandaVOIP::updateVoiceUsers(vector<QString> clients){
     int i;
-    for (i = general_list->count(); i > 0; i--){
+    for (i = general_list->count(); i > 0; i--)
         general_list->takeItem(0);
-    }
-    for(i = 0; (unsigned int)i < clients.size(); i++){
+    for (i = 0; (unsigned int)i < clients.size(); i++)
         general_list->addItem(clients[i]);
-    }
 }

@@ -5,8 +5,11 @@
 
 class Menu : public QWidget{
     Q_OBJECT
-    public:
-        explicit Menu(QWidget *parent = nullptr);
+
+    private:
+        QWidget *parent;
+        bool dragging = false;
+        QPoint previous_pos;
 
     protected:
         void paintEvent(QPaintEvent *);
@@ -14,10 +17,8 @@ class Menu : public QWidget{
         void mouseMoveEvent(QMouseEvent *e);
         void mouseReleaseEvent(QMouseEvent *e);
 
-    private:
-        QWidget *parent;
-        bool dragging = false;
-        QPoint previous_pos;
+    public:
+        explicit Menu(QWidget *parent = nullptr);
 };
 
 #endif // MENU_H
