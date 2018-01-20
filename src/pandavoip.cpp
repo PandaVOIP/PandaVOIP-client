@@ -19,7 +19,7 @@ PandaVOIP::~PandaVOIP(){
 void PandaVOIP::setup_PandaVOIP(){
     // Voip
     this->voipController = new VoipController(this);
-    this->voipController->controlConnect();
+    //this->voipController->controlConnect();
 
     // Should we move this to a function?
     /*
@@ -34,7 +34,7 @@ void PandaVOIP::setup_PandaVOIP(){
     */
 
     // Login popup... duh. Should add checks if this is necessary in the future
-    //login_popup();
+    login_popup();
 
     create_server_node();
     create_server_node();
@@ -68,8 +68,8 @@ void PandaVOIP::create_server_node(){
 
 void PandaVOIP::login_popup(){
     // Needs to be redone; NULL parent doesn't get automatically deallocated by Q_OBJECT
-    account = new Account(NULL);
-    account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    account = new Account(this);
+    account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
     account->show();
 }
 
@@ -87,6 +87,7 @@ void PandaVOIP::on_message_box_returned(){
 
 void PandaVOIP::on_settings_clicked(){
     settings = new Settings(NULL);
+    settings->setWindowFlags(Qt::WindowStaysOnTopHint);
     settings->setAttribute(Qt::WA_DeleteOnClose);
     settings->show();
 }
