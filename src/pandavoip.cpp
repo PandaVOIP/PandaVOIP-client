@@ -22,6 +22,7 @@ void PandaVOIP::setup_PandaVOIP(){
     this->voipController->controlConnect();
 
     // Should we move this to a function?
+    /*
     QPushButton* general_label = new QPushButton(this->ui->voice_channels);
     general_label->setText("General");
     this->ui->verticalLayout->addWidget(general_label);
@@ -30,15 +31,39 @@ void PandaVOIP::setup_PandaVOIP(){
     general_list->setSelectionMode(QAbstractItemView::NoSelection);
 
     this->ui->verticalLayout->addWidget(general_list);
+    */
 
     // Login popup... duh. Should add checks if this is necessary in the future
-    login_popup();
+    //login_popup();
+
+    create_server_node();
+    create_server_node();
+    create_server_node();
 
     // Connect all signals at the end
-    connect(ui->settings, &QPushButton::toggled, this, &PandaVOIP::on_settings_clicked);
-    connect(ui->close, &QPushButton::toggled, this, &PandaVOIP::on_close_clicked);
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
-    connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
+    //connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
+}
+
+// TODO: Clean up and move to custom class. This is just a proof of concept.
+// Also, need to clean up the CSS for the join_general_chat. Thing's ghetto
+void PandaVOIP::create_server_node(){
+    QWidget *general_chat = new QWidget(this->ui->server_navigation);
+    general_chat->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    QVBoxLayout *general_chat_layout = new QVBoxLayout(general_chat);
+
+    QPushButton *join_general_chat = new QPushButton("General", general_chat);
+
+    QListWidget *users = new QListWidget(general_chat);
+    users->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+    users->addItem("Ritlew");
+    users->addItem("Slygga");
+
+    general_chat_layout->addWidget(join_general_chat);
+    general_chat_layout->addWidget(users);
+
+    this->ui->server_navigation_layout->addWidget(general_chat);
 }
 
 void PandaVOIP::login_popup(){
@@ -67,6 +92,19 @@ void PandaVOIP::on_settings_clicked(){
 
 void PandaVOIP::on_close_clicked(){
     QApplication::quit();
+}
+
+void PandaVOIP::on_maximize_clicked(){
+    if(QMainWindow::windowState() == Qt::WindowMaximized){
+        QMainWindow::showNormal();
+    }
+    else{
+        QMainWindow::showMaximized();
+    }
+}
+
+void PandaVOIP::on_minimize_clicked(){
+    QMainWindow::showMinimized();
 }
 
 void PandaVOIP::new_message(QString username, QString message){
