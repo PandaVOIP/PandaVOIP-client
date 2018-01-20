@@ -9,6 +9,7 @@ QT       += core gui multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = panda
+TARGET = PandaVOIP
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,29 +25,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
+    main.cpp \
     messagebox.cpp \
     pandavoip.cpp \
-    opusutil.cpp \
-    voipaudioiodevice.cpp \
-    voiptcpsocket.cpp \
-    voipudpsocket.cpp \
-    voipcontroller.cpp \
     settings.cpp \
     account.cpp \
-    menu.cpp
+    menu.cpp \
+    lib/opusutil.cpp \
+    lib/voipaudioiodevice.cpp \
+    lib/voipcontroller.cpp \
+    lib/voiptcpsocket.cpp \
+    lib/voipudpsocket.cpp
 
 HEADERS += \
     messagebox.h \
     pandavoip.h \
-    opusutil.h \
-    voipaudioiodevice.h \
-    voiptcpsocket.h \
-    voipudpsocket.h \
-    voipcontroller.h \
     settings.h \
     account.h \
-    menu.h
+    menu.h \
+    lib/opusutil.h \
+    lib/voipaudioiodevice.h \
+    lib/voipcontroller.h \
+    lib/voiptcpsocket.h \
+    lib/voipudpsocket.h
 
 FORMS += \
     pandavoip.ui \
@@ -55,5 +56,8 @@ FORMS += \
 
 DISTFILES += \
     images/profileimage.jpg
+
+RESOURCES += \
+    resources.qrc
 
 unix|win32: LIBS += -lopus
