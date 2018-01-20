@@ -1,3 +1,15 @@
 <RCC>
     <qresource prefix="/images"/>
+    <qresource prefix="/">
+        <file>icons/close_light.png</file>
+        <file>icons/settings_dark.png</file>
+        <file>icons/settings_light.png</file>
+        <file>icons/text_dark.png</file>
+        <file>icons/text_light.png</file>
+        <file>icons/fullscreen_dark.png</file>
+        <file>icons/fullscreen_light.png</file>
+        <file>icons/minimize_dark.png</file>
+        <file>icons/minimize_light.png</file>
+        <file>icons/close_dark.png</file>
+    </qresource>
 </RCC>

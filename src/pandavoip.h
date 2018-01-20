@@ -27,12 +27,15 @@ class PandaVOIP : public QMainWindow{
         void on_message_box_returned();
         void on_settings_clicked();
         void on_close_clicked();
+        void on_maximize_clicked();
+        void on_minimize_clicked();
         void updateVoiceUsers(std::vector<QString>);
         void updateChatUsers(std::vector<QString>);
 
     private:
         void setup_PandaVOIP();
         void login_popup();
+        void create_server_node();
 
         Ui::PandaVOIP *ui;
         QListWidget* general_chat_list;
