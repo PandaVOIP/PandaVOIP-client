@@ -19,8 +19,8 @@ class PandaVOIP : public QMainWindow{
     Q_OBJECT
 
     private:
-        void setup_PandaVOIP();
-        void login_popup();
+        void setupPandaVOIP();
+        void loginPopup();
 
         Ui::PandaVOIP *ui;
         QListWidget* general_list;
@@ -31,14 +31,14 @@ class PandaVOIP : public QMainWindow{
     public:
         explicit PandaVOIP(QWidget *parent = 0);
         ~PandaVOIP();
-        void new_message(QString, QString);
+        void newMessage(QString, QString);
 
     public slots:
-        void on_message_box_returned();
-        void on_settings_clicked();
-        void on_close_clicked();
-        void on_maximize_clicked();
-        void on_minimize_clicked();
+        void onMessageBoxReturned();
+        void onSettingsClicked();
+        void onCloseClicked();
+        void onMaximizeClicked();
+        void onMinimizeClicked();
         void updateVoiceUsers(std::vector<QString>);
         void updateChatUsers(std::vector<QString>);
 

@@ -13,7 +13,7 @@ class Account : public QWidget{
     private:
         Ui::Account *ui;
 
-        void setup_AccountScreen();
+        void setupAccountScreen();
 
     protected:
         void closeEvent(QCloseEvent *e);
@@ -22,8 +22,9 @@ class Account : public QWidget{
         explicit Account(QWidget *parent = 0);
         ~Account();
 
-    public slots:
-        void on_cancel_clicked();
+    private slots:
+        void onCancelClicked();
+        void onLoginClicked();
 };
 
 #endif // ACCOUNT_H

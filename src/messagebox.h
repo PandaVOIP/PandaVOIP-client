@@ -13,7 +13,7 @@ class MessageBox : public QTextEdit{
         void keyPressEvent(QKeyEvent *e);
 
     signals:
-        void on_message_box_returned();
+        void onMessageBoxReturned();
 };
 
 #endif // MESSAGEBOX_H

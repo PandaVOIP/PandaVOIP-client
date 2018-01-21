@@ -10,14 +10,14 @@
 using namespace std;
 PandaVOIP::PandaVOIP(QWidget *parent) : QMainWindow(parent), ui(new Ui::PandaVOIP){
     ui->setupUi(this);
-    setup_PandaVOIP();
+    setupPandaVOIP();
 }
 
 PandaVOIP::~PandaVOIP(){
     delete ui;
 }
 
-void PandaVOIP::setup_PandaVOIP(){
+void PandaVOIP::setupPandaVOIP(){
     // Voip
     this->voipController = new VoipController(this);
     //this->voipController->controlConnect();
@@ -36,24 +36,28 @@ void PandaVOIP::setup_PandaVOIP(){
     */
 
     // Login popup... duh. Should add checks if this is necessary in the future
-    login_popup();
+    //loginPopup();
 
     ServerNavigation *server_navigation = new ServerNavigation(this);
-    server_navigation->new_server_node("General", this->ui->server_navigation_layout, this->ui->server_navigation);
-    server_navigation->add_user("Slygga");
+    server_navigation->newServerNode("General", this->ui->server_navigation_layout, this->ui->server_navigation);
+    server_navigation->addUser("Slygga");
 
     // Connect all signals at the end
-    connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
+    connect(ui->message_box, &MessageBox::onMessageBoxReturned, this, &PandaVOIP::onMessageBoxReturned);
+    connect(ui->close, &QPushButton::released, this, &PandaVOIP::onCloseClicked);
+    connect(ui->maximize, &QPushButton::released, this, &PandaVOIP::onMaximizeClicked);
+    connect(ui->minimize, &QPushButton::released, this, &PandaVOIP::onMinimizeClicked);
+    connect(ui->settings, &QPushButton::released, this, &PandaVOIP::onSettingsClicked);
     //connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 }
 
-void PandaVOIP::login_popup(){
+void PandaVOIP::loginPopup(){
     account = new Account(this);
     account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
     account->show();
 }
 
-void PandaVOIP::on_message_box_returned(){
+void PandaVOIP::onMessageBoxReturned(){
     // Do nothing if there is no message to send
     if (this->ui->message_box->toPlainText().length() == 0)
         return;
@@ -65,29 +69,29 @@ void PandaVOIP::on_message_box_returned(){
     this->voipController->send_text_message(message);
 }
 
-void PandaVOIP::on_settings_clicked(){
+void PandaVOIP::onSettingsClicked(){
     settings = new Settings(NULL);
     settings->setWindowFlags(Qt::WindowStaysOnTopHint);
     settings->setAttribute(Qt::WA_DeleteOnClose);
     settings->show();
 }
 
-void PandaVOIP::on_close_clicked(){
+void PandaVOIP::onCloseClicked(){
     QApplication::quit();
 }
 
-void PandaVOIP::on_maximize_clicked(){
+void PandaVOIP::onMaximizeClicked(){
     if (QMainWindow::windowState() == Qt::WindowMaximized)
         QMainWindow::showNormal();
     else
         QMainWindow::showMaximized();
 }
 
-void PandaVOIP::on_minimize_clicked(){
+void PandaVOIP::onMinimizeClicked(){
     QMainWindow::showMinimized();
 }
 
-void PandaVOIP::new_message(QString username, QString message){
+void PandaVOIP::newMessage(QString username, QString message){
     // Get current position of the messages container
     QTextCursor cursor = this->ui->messages->textCursor();
     cursor.movePosition(QTextCursor::End);

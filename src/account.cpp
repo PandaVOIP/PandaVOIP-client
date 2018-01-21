@@ -6,11 +6,12 @@
 Account::Account(QWidget *parent) : QWidget(parent), ui(new Ui::Account){
     ui->setupUi(this);
 
-    setup_AccountScreen();
+    setupAccountScreen();
 }
 
-void Account::setup_AccountScreen(){
-    connect(this->ui->cancel, &QPushButton::toggled, this, &Account::on_cancel_clicked);
+void Account::setupAccountScreen(){
+    connect(this->ui->cancel, &QPushButton::released, this, &Account::onCancelClicked);
+    connect(this->ui->login, &QPushButton::released, this, &Account::onLoginClicked);
 }
 
 Account::~Account(){
@@ -21,6 +22,10 @@ void Account::closeEvent(QCloseEvent *e){
     QApplication::quit();
 }
 
-void Account::on_cancel_clicked(){
+void Account::onCancelClicked(){
     QApplication::quit();
+}
+
+void Account::onLoginClicked(){
+    std::cout << "moron" << std::endl;
 }

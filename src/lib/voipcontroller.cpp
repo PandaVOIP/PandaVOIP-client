@@ -57,6 +57,7 @@ void VoipController::receive_text_message(QJsonObject data){
         data["message"].toObject()["sender_id"].toString(),
         data["message"].toObject()["text"].toString()
     );
+
 }
 
 bool VoipController::send_text_message(QString message){
