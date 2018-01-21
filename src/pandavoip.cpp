@@ -22,10 +22,6 @@ void PandaVOIP::setupPandaVOIP(){
     this->voipController = new VoipController(this);
     //this->voipController->controlConnect();
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c
     // Should we move this to a function?
     /*
     QPushButton* general_label = new QPushButton(this->ui->voice_channels);
@@ -123,18 +119,9 @@ void PandaVOIP::newMessage(QString username, QString message){
 
 void PandaVOIP::updateChatUsers(vector<QString> clients){
     int i;
-<<<<<<< HEAD
-    // remove all elements from list
-    for (i = general_list->count(); i > 0; i--){
-        general_list->takeItem(0);
-    }
-    // add all updated users to list
-    for(i = 0; (unsigned int)i < clients.size(); i++){
-=======
     for (i = general_list->count(); i > 0; i--)
         general_list->takeItem(0);
     for (i = 0; (unsigned int)i < clients.size(); i++)
->>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c
         general_list->addItem(clients[i]);
 }
 

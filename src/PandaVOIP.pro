@@ -8,10 +8,6 @@ QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-<<<<<<< HEAD
-TARGET = panda
-=======
->>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c
 TARGET = PandaVOIP
 TEMPLATE = app
 
@@ -58,18 +54,10 @@ FORMS += \
     pandavoip.ui \
     settings.ui \
     account.ui
-<<<<<<< HEAD
 
 DISTFILES += \
     images/profileimage.jpg
 
 RESOURCES += \
     resources.qrc
-
-=======
-
-RESOURCES += \
-    resources.qrc
-
->>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c
 unix|win32: LIBS += -lopus
