@@ -1,7 +1,7 @@
 #ifndef OPUSUTIL_H
 #define OPUSUTIL_H
 
-#include <opus.h>
+#include <opus/opus.h>
 #include <QAudioOutput>
 #include <QIODevice>
 

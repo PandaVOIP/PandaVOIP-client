@@ -3,7 +3,7 @@
  */
 #include "opusutil.h"
 #include <string.h>
-#include <opus.h>
+#include <opus/opus.h>
 #include <stdlib.h>
 #include <iostream>
 
