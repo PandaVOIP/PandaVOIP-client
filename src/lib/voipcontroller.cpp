@@ -74,7 +74,7 @@ void VoipController::receive_text_message(char * message){
     strncpy(text_message, message+8, strlen(message) - 8);
     text_message[strlen(message) - 8] = '\0';
 
-    this->gui->new_message(QString(user), QString(text_message));
+    this->gui->newMessage(QString(user), QString(text_message));
 }
 
 bool VoipController::send_text_message(QString message){

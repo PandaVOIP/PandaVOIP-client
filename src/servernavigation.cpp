@@ -8,12 +8,12 @@ ServerNavigation::ServerNavigation(QWidget *parent) : QWidget(parent)
     this->server_navigation = (server_node *)malloc(sizeof(struct server_node));
 }
 
-void ServerNavigation::new_server_node(const QString &node_name, QLayout *parent_layout, QWidget *parent) {
-    create_node(node_name, parent_layout, parent);
-    create_user_list();
+void ServerNavigation::newServerNode(const QString &node_name, QLayout *parent_layout, QWidget *parent) {
+    createNode(node_name, parent_layout, parent);
+    createUserList();
 }
 
-void ServerNavigation::create_node(const QString &node_name, QLayout *parent_layout, QWidget *parent) {
+void ServerNavigation::createNode(const QString &node_name, QLayout *parent_layout, QWidget *parent) {
     QWidget *node = new QWidget(parent);
     node->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -28,7 +28,7 @@ void ServerNavigation::create_node(const QString &node_name, QLayout *parent_lay
     this->server_navigation->node_layout = node_layout;
 }
 
-void ServerNavigation::create_user_list() {
+void ServerNavigation::createUserList() {
     QListWidget *user_list = new QListWidget(this->server_navigation->node);
     user_list->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum);
 
@@ -37,6 +37,6 @@ void ServerNavigation::create_user_list() {
     this->server_navigation->user_list = user_list;
 }
 
-void ServerNavigation::add_user(const QString &username) {
+void ServerNavigation::addUser(const QString &username) {
     this->server_navigation->user_list->addItem(username);
 }

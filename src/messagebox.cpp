@@ -8,7 +8,7 @@ MessageBox::MessageBox(QWidget *parent = 0) : QTextEdit(parent){
 
 void MessageBox::keyPressEvent(QKeyEvent *e){
     if (e->key() == Qt::Key_Return)
-        emit on_message_box_returned();
+        emit onMessageBoxReturned();
     else
         QTextEdit::keyPressEvent(e);
 }
