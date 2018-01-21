@@ -35,7 +35,8 @@ SOURCES += \
     lib/voipaudioiodevice.cpp \
     lib/voipcontroller.cpp \
     lib/voiptcpsocket.cpp \
-    lib/voipudpsocket.cpp
+    lib/voipudpsocket.cpp \
+    servernavigation.cpp
 
 HEADERS += \
     messagebox.h \
@@ -47,7 +48,8 @@ HEADERS += \
     lib/voipaudioiodevice.h \
     lib/voipcontroller.h \
     lib/voiptcpsocket.h \
-    lib/voipudpsocket.h
+    lib/voipudpsocket.h \
+    servernavigation.h
 
 FORMS += \
     pandavoip.ui \

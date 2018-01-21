@@ -21,7 +21,6 @@ class PandaVOIP : public QMainWindow{
     private:
         void setup_PandaVOIP();
         void login_popup();
-        void create_server_node();
 
         Ui::PandaVOIP *ui;
         QListWidget* general_list;
