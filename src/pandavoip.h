@@ -40,7 +40,10 @@ class PandaVOIP : public QMainWindow{
         void onMaximizeClicked();
         void onMinimizeClicked();
         void updateVoiceUsers(std::vector<QString>);
+<<<<<<< HEAD
         void updateChatUsers(std::vector<QString>);
+=======
+>>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c
 };
 
 #endif // PandaVOIP_H

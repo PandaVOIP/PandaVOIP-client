@@ -58,6 +58,13 @@ void VoipController::receive_text_message(QJsonObject data){
         data["message"].toObject()["text"].toString()
     );
 
+<<<<<<< HEAD:src/lib/voipcontroller.cpp
+=======
+    strncpy(text_message, message+8, strlen(message) - 8);
+    text_message[strlen(message) - 8] = '\0';
+
+    this->gui->newMessage(QString(user), QString(text_message));
+>>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c:src/lib/voipcontroller.cpp
 }
 
 bool VoipController::send_text_message(QString message){

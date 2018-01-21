@@ -19,7 +19,10 @@ Account::~Account(){
 }
 
 void Account::closeEvent(QCloseEvent *e){
+<<<<<<< HEAD
     Q_UNUSED(e);
+=======
+>>>>>>> 116638c8298b6259da36c2a9b2dc1c17dd6e427c
     QApplication::quit();
 }
 
