@@ -1,6 +1,7 @@
 #include "pandavoip.h"
 #include "ui_pandavoip.h"
 #include "settings.h"
+#include "servernavigation.h"
 #include <iostream>
 #include <QScrollBar>
 #include <QTextTable>
@@ -36,38 +37,16 @@ void PandaVOIP::setup_PandaVOIP(){
     // Login popup... duh. Should add checks if this is necessary in the future
     login_popup();
 
-    create_server_node();
-    create_server_node();
-    create_server_node();
+    ServerNavigation *server_navigation = new ServerNavigation(this);
+    server_navigation->new_server_node("General", this->ui->server_navigation_layout, this->ui->server_navigation);
+    server_navigation->add_user("Slygga");
 
     // Connect all signals at the end
     connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
     //connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 }
 
-// TODO: Clean up and move to custom class. This is just a proof of concept.
-// Also, need to clean up the CSS for the join_general_chat. Thing's ghetto
-void PandaVOIP::create_server_node(){
-    QWidget *general_chat = new QWidget(this->ui->server_navigation);
-    general_chat->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    QVBoxLayout *general_chat_layout = new QVBoxLayout(general_chat);
-
-    QPushButton *join_general_chat = new QPushButton("General", general_chat);
-
-    QListWidget *users = new QListWidget(general_chat);
-    users->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-    users->addItem("Ritlew");
-    users->addItem("Slygga");
-
-    general_chat_layout->addWidget(join_general_chat);
-    general_chat_layout->addWidget(users);
-
-    this->ui->server_navigation_layout->addWidget(general_chat);
-}
-
 void PandaVOIP::login_popup(){
-    // Needs to be redone; NULL parent doesn't get automatically deallocated by Q_OBJECT
     account = new Account(this);
     account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
     account->show();
