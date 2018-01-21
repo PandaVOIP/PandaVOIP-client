@@ -14,8 +14,10 @@ void ServerNavigation::newServerNode(const QString &node_name, QLayout *parent_l
 }
 
 void ServerNavigation::createNode(const QString &node_name, QLayout *parent_layout, QWidget *parent) {
+    //parent_layout->setAlignment(Qt::AlignTop);
+
     QWidget *node = new QWidget(parent);
-    node->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    node->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     QVBoxLayout *node_layout = new QVBoxLayout(node);
 
