@@ -34,5 +34,6 @@ void Menu::mouseMoveEvent(QMouseEvent *e){
 }
 
 void Menu::mouseReleaseEvent(QMouseEvent *e){
+    Q_UNUSED(e);
     dragging = false;
 }

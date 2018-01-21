@@ -19,6 +19,7 @@ Account::~Account(){
 }
 
 void Account::closeEvent(QCloseEvent *e){
+    Q_UNUSED(e);
     QApplication::quit();
 }
 

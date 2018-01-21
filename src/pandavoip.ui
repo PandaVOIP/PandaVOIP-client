@@ -22,24 +22,17 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
   <widget class="QWidget" name="layout">
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">#main_menu{
-	background-color: rgb(50, 50, 50);
+        background-color: rgb(50, 50, 50);
 }
 
 #main_widget{
-	background-color: rgb(70, 70, 70);
+        background-color: rgb(70, 70, 70);
 }</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -62,18 +55,18 @@
      <widget class="Menu" name="main_menu" native="true">
       <property name="styleSheet">
        <string notr="true">#settings, #close, #maximize, #minimize{
-	border: none;
-	background-color: none;
-	color: white;
-	padding: 5px 10px;
+        border: none;
+        background-color: none;
+        color: white;
+        padding: 5px 10px;
 }
 
 #settings:hover, #maximize:hover, #minimize:hover{
-	background-color: #6adede;
+        background-color: #6adede;
 }
 
 #close:hover{
-	background-color: rgb(255, 55, 55);
+        background-color: rgb(255, 55, 55);
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -189,11 +182,11 @@
      <widget class="QWidget" name="main_widget" native="true">
       <property name="styleSheet">
        <string notr="true">#server_navigation_area{
-	border: none;
+        border: none;
 }
 
 #server_navigation{
-	background-color: rgb(50, 50, 50);
+        background-color: rgb(50, 50, 50);
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -216,7 +209,6 @@
         <widget class="QScrollArea" name="server_navigation_area">
          <property name="minimumSize">
           <size>
-
            <width>200</width>
            <height>0</height>
           </size>
@@ -247,35 +239,35 @@
           </property>
           <property name="styleSheet">
            <string notr="true">*{
-	color: white;
+        color: white;
 }
 
 #server_navigation &gt; QWidget{
-	border-top: 1px solid #6f6f6f;
+        border-top: 1px solid #6f6f6f;
 }
 
 #server_navigation_layout{
-	vertical-align: top;
+        vertical-align: top;
 }
 
 QPushButton{
-	border: none;
-	background-color: none;
-	font-size: 18px;
+        border: none;
+        background-color: none;
+        font-size: 18px;
 
-	padding-right: 180px;
-	qproperty-icon: url(:/icons/text_light.png);
-	qproperty-iconSize: 22px 22px;
+        padding-right: 180px;
+        qproperty-icon: url(:/icons/text_light.png);
+        qproperty-iconSize: 22px 22px;
 }
 
 QPushButton:hover{
-	background-color: #def5d0;
+        background-color: #def5d0;
 }
 
 QListWidget{
-	border: none;
-	background-color: rgb(50, 50, 50);
-	margin-left: 20px;
+        border: none;
+        background-color: rgb(50, 50, 50);
+        margin-left: 20px;
 }</string>
           </property>
           <layout class="QVBoxLayout" name="server_navigation_layout">
@@ -308,11 +300,11 @@ QListWidget{
          </property>
          <property name="styleSheet">
           <string notr="true">QTextEdit{
-	border: none;
-	background-color: #7f7f7f;
-	color: #cecece;
-	font-size: 14px;
-	padding: 5px;
+        border: none;
+        background-color: #7f7f7f;
+        color: #cecece;
+        font-size: 14px;
+        padding: 5px;
 }</string>
          </property>
          <layout class="QGridLayout" name="right_section">

@@ -41,18 +41,6 @@ class PandaVOIP : public QMainWindow{
         void onMinimizeClicked();
         void updateVoiceUsers(std::vector<QString>);
         void updateChatUsers(std::vector<QString>);
-
-    private:
-        void setup_PandaVOIP();
-        void login_popup();
-        void create_server_node();
-
-        Ui::PandaVOIP *ui;
-        QListWidget* general_chat_list;
-        QListWidget* general_voice_list;
-        VoipController* voipController;
-        Account *account = NULL;
-        Settings *settings = NULL;
 };
 
 #endif // PandaVOIP_H
