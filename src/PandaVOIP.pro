@@ -8,7 +8,7 @@ QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = BlackChat
+TARGET = panda
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -44,9 +44,6 @@ HEADERS += \
 
 FORMS += \
     pandavoip.ui
-
-RESOURCES += \
-    resources.qrc
 
 DISTFILES += \
     images/profileimage.jpg

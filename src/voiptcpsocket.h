@@ -5,6 +5,7 @@
 #include <QString>
 #include <QObject>
 #include <QAbstractSocket>
+#include <QJsonObject>
 
 #include "voipcontroller.h"
 
@@ -14,7 +15,7 @@ class VoipTCPSocket : public QObject
 public:
     VoipTCPSocket(VoipController*, QString, quint16, int);
     void connect_to_voice();
-    void send_text_message(char *);
+    void send_command(QJsonObject);
     void disconnect_from_voice();
 public slots:
     void read_data();
@@ -22,7 +23,7 @@ public slots:
     void tcp_disconnected();
     void tcp_error(QAbstractSocket::SocketError);
 private:
-    void send_data(char *, int);
+    void send_data(QJsonObject);
 
     VoipController* controller;
     QTcpSocket* tcp_socket;

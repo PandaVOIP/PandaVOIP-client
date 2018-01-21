@@ -5,14 +5,6 @@
 #include <QAudioOutput>
 #include <QIODevice>
 
-class OpusUtil
-{
-public:
-    OpusUtil();
-    static int encode(unsigned char *, int, unsigned char **, int *);
-    static int decode(unsigned char *, int, unsigned char **, int *);
-};
-
 class OpusVoiceEncoder {
 public:
     OpusVoiceEncoder();
