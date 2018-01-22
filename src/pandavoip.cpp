@@ -35,7 +35,7 @@ void PandaVOIP::setupPandaVOIP(){
     */
 
     // Login popup... duh. Should add checks if this is necessary in the future
-    //loginPopup();
+    loginPopup();
 
     // Fix vertical alignment
     this->ui->server_navigation_layout->setAlignment(Qt::AlignTop);
