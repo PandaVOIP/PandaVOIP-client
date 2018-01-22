@@ -26,7 +26,7 @@ OpusVoiceEncoder::OpusVoiceEncoder(){
     opus_encoder_ctl(encoder, OPUS_SET_BITRATE(BITRATE));
 }
 
-OpusVoiceEncoder::encode(unsigned char* wavData, int wavLength, unsigned char** opusAudio, int* opusLength){
+int OpusVoiceEncoder::encode(unsigned char* wavData, int wavLength, unsigned char** opusAudio, int* opusLength){
     // temporary buffer to use for encoding
     unsigned char inputBuffer[MAX_FRAME_SIZE*CHANNELS*2];
     // used to store the PCM samples as shorts instead of bytes
@@ -104,12 +104,12 @@ OpusVoiceDecoder::OpusVoiceDecoder(int id){
     outputBuffer = outputDevice->start();
 }
 
-OpusVoiceDecoder::get_id(){
+int OpusVoiceDecoder::get_id(){
     return this->id;
 }
 
 // decodes audio and then immediately plays it to the speaker
-OpusVoiceDecoder::decode_and_play(unsigned char* opusData, int opusLength){
+int OpusVoiceDecoder::decode_and_play(unsigned char* opusData, int opusLength){
     // initial output of decoding process
     opus_int16 out[MAX_FRAME_SIZE*CHANNELS];
     // intermediate PCM output

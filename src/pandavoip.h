@@ -7,7 +7,7 @@
 #include <QBuffer>
 #include <QListWidget>
 #include <QString>
-#include "lib\voipcontroller.h"
+#include "lib/voipcontroller.h"
 #include "account.h"
 #include "settings.h"
 
