@@ -5,15 +5,15 @@
 class MessageBox : public QTextEdit{
     Q_OBJECT
 
+    private:
+        QWidget *parent;
+
     public:
         MessageBox(QWidget *parent);
         void keyPressEvent(QKeyEvent *e);
 
     signals:
-        void on_message_box_returned();
-
-    private:
-        QWidget *parent;
+        void onMessageBoxReturned();
 };
 
 #endif // MESSAGEBOX_H

@@ -1,5 +1,7 @@
 #include "pandavoip.h"
 #include "ui_pandavoip.h"
+#include "settings.h"
+#include "servernavigation.h"
 #include <iostream>
 #include <QScrollBar>
 #include <QTextTable>
@@ -8,52 +10,60 @@
 using namespace std;
 PandaVOIP::PandaVOIP(QWidget *parent) : QMainWindow(parent), ui(new Ui::PandaVOIP){
     ui->setupUi(this);
-    setup_PandaVOIP();
+    setupPandaVOIP();
 }
 
 PandaVOIP::~PandaVOIP(){
     delete ui;
 }
 
-void PandaVOIP::setup_PandaVOIP(){
+void PandaVOIP::setupPandaVOIP(){
+    // Voip
     this->voipController = new VoipController(this);
+    //this->voipController->controlConnect();
 
-    this->voipController->controlConnect();
+    // Should we move this to a function?
+    /*
+    QPushButton* general_label = new QPushButton(this->ui->voice_channels);
+    general_label->setText("General");
+    this->ui->verticalLayout->addWidget(general_label);
 
-    connect(ui->message_box, &MessageBox::on_message_box_returned, this, &PandaVOIP::on_message_box_returned);
+    general_list = new QListWidget(this->ui->voice_channels);
+    general_list->setSelectionMode(QAbstractItemView::NoSelection);
 
-    // voice area
-    // label for voice channel
-    QPushButton* general_voice_label = new QPushButton(this->ui->voice_channels);
-    general_voice_label->setText("General");
-    this->ui->voiceLayout->addWidget(general_voice_label);
+    this->ui->verticalLayout->addWidget(general_list);
+    */
 
-    // connect to voice when the channel button is clicked
-    connect(general_voice_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
+    // Login popup... duh. Should add checks if this is necessary in the future
+    loginPopup();
 
-    // list that will be populated when users connect
-    general_voice_list = new QListWidget(this->ui->voice_channels);
-    general_voice_list->setSelectionMode(QAbstractItemView::NoSelection);
+    // Fix vertical alignment
+    this->ui->server_navigation_layout->setAlignment(Qt::AlignTop);
 
-    this->ui->voiceLayout->addWidget(general_voice_list);
+    ServerNavigation *server_navigation = new ServerNavigation(this);
+    server_navigation->newServerNode("General", this->ui->server_navigation_layout, this->ui->server_navigation);
+    server_navigation->addUser("Slygga");
 
-    // text users area
-    // same as above documentation
-    QPushButton* general_chat_label = new QPushButton(this->ui->voice_channels);
-    general_chat_label->setText("General");
-    this->ui->chatLayout->addWidget(general_chat_label);
-
-    general_chat_list = new QListWidget(this->ui->voice_channels);
-    general_chat_list->setSelectionMode(QAbstractItemView::NoSelection);
-
-    this->ui->chatLayout->addWidget(general_chat_list);
+    // Connect all signals at the end
+    connect(ui->message_box, &MessageBox::onMessageBoxReturned, this, &PandaVOIP::onMessageBoxReturned);
+    connect(ui->close, &QPushButton::released, this, &PandaVOIP::onCloseClicked);
+    connect(ui->maximize, &QPushButton::released, this, &PandaVOIP::onMaximizeClicked);
+    connect(ui->minimize, &QPushButton::released, this, &PandaVOIP::onMinimizeClicked);
+    connect(ui->settings, &QPushButton::released, this, &PandaVOIP::onSettingsClicked);
+    //connect(general_label, SIGNAL(clicked()), this->voipController, SLOT(connectVoice()));
 }
 
-void PandaVOIP::on_message_box_returned(){
+void PandaVOIP::loginPopup(){
+    account = new Account(this);
+    account->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
+    account->show();
+}
+
+void PandaVOIP::onMessageBoxReturned(){
     // Do nothing if there is no message to send
-    if(this->ui->message_box->toPlainText().length() == 0){
+    if (this->ui->message_box->toPlainText().length() == 0)
         return;
-    }
+
     QString message = this->ui->message_box->toHtml();
     // Clear message box
     this->ui->message_box->clear();
@@ -61,7 +71,29 @@ void PandaVOIP::on_message_box_returned(){
     this->voipController->send_text_message(message);
 }
 
-void PandaVOIP::new_message(QString username, QString message){
+void PandaVOIP::onSettingsClicked(){
+    settings = new Settings(NULL);
+    settings->setWindowFlags(Qt::WindowStaysOnTopHint);
+    settings->setAttribute(Qt::WA_DeleteOnClose);
+    settings->show();
+}
+
+void PandaVOIP::onCloseClicked(){
+    QApplication::quit();
+}
+
+void PandaVOIP::onMaximizeClicked(){
+    if (QMainWindow::windowState() == Qt::WindowMaximized)
+        QMainWindow::showNormal();
+    else
+        QMainWindow::showMaximized();
+}
+
+void PandaVOIP::onMinimizeClicked(){
+    QMainWindow::showMinimized();
+}
+
+void PandaVOIP::newMessage(QString username, QString message){
     // Get current position of the messages container
     QTextCursor cursor = this->ui->messages->textCursor();
     cursor.movePosition(QTextCursor::End);
@@ -87,24 +119,16 @@ void PandaVOIP::new_message(QString username, QString message){
 
 void PandaVOIP::updateChatUsers(vector<QString> clients){
     int i;
-    // remove all elements from list
-    for (i = general_chat_list->count(); i > 0; i--){
-        general_chat_list->takeItem(0);
-    }
-    // add all updated users to list
-    for(i = 0; (unsigned int)i < clients.size(); i++){
-        general_chat_list->addItem(clients[i]);
-    }
+    for (i = general_list->count(); i > 0; i--)
+        general_list->takeItem(0);
+    for (i = 0; (unsigned int)i < clients.size(); i++)
+        general_list->addItem(clients[i]);
 }
 
 void PandaVOIP::updateVoiceUsers(vector<QString> clients){
     int i;
-    // remove all elements from list
-    for (i = general_voice_list->count(); i > 0; i--){
-        general_voice_list->takeItem(0);
-    }
-    // add all updated users to list
-    for(i = 0; (unsigned int)i < clients.size(); i++){
-        general_voice_list->addItem(clients[i]);
-    }
+    for (i = general_list->count(); i > 0; i--)
+        general_list->takeItem(0);
+    for (i = 0; (unsigned int)i < clients.size(); i++)
+        general_list->addItem(clients[i]);
 }

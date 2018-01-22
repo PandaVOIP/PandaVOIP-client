@@ -8,10 +8,8 @@ MessageBox::MessageBox(QWidget *parent = 0) : QTextEdit(parent){
 
 // hook for QT to tell us when the return key is pressed
 void MessageBox::keyPressEvent(QKeyEvent *e){
-    if(e->key() == Qt::Key_Return){
-        emit on_message_box_returned();
-    }
-    else{
+    if (e->key() == Qt::Key_Return)
+        emit onMessageBoxReturned();
+    else
         QTextEdit::keyPressEvent(e);
-    }
 }

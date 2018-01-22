@@ -1,1 +1,2 @@
-*.pro.user
+src/PandaVOIP.pro.user*
+build*/

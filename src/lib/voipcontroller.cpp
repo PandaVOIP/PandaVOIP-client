@@ -53,7 +53,7 @@ bool VoipController::controlConnect(){
 
 void VoipController::receive_text_message(QJsonObject data){
     // give message to GUI
-    this->gui->new_message(
+    this->gui->newMessage(
         data["message"].toObject()["sender_id"].toString(),
         data["message"].toObject()["text"].toString()
     );

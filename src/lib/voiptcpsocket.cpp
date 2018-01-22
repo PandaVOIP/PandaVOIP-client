@@ -114,7 +114,7 @@ void VoipTCPSocket::read_data(){
     }
 }
 
-void VoipTCPSocket::connect_to_voice(){    
+void VoipTCPSocket::connect_to_voice(){
     QJsonObject json_message{
         {"command", "voice connect"}
     };
