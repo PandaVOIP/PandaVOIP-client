@@ -1,5 +1,5 @@
 # Style
-The project follows the (Qt guidelines)[https://wiki.qt.io/Qt_Coding_Style]. However, there are a few
+The project follows the [Qt guidelines](https://wiki.qt.io/Qt_Coding_Style). However, there are a few
 exceptions that are followed.
 
 ### Exceptions
