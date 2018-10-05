@@ -1,4 +1,4 @@
-#include "settings.h"
+#include "settings_ui.h"
 #include "ui_settings.h"
 
 Settings::Settings(QWidget *parent) : QWidget(parent), ui(new Ui::Settings) {

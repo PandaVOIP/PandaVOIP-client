@@ -1,45 +1,14 @@
-#ifndef PandaVOIP_H
-#define PandaVOIP_H
-#include <QMainWindow>
-#include <QAudioInput>
-#include <QAudioOutput>
-#include <QBuffer>
-#include <QListWidget>
-#include <QString>
+#ifndef PANDAVOIP_H
+#define PANDAVOIP_H
 #include "voipcontroller.h"
-#include "account.h"
-#include "settings.h"
 
-namespace Ui {
-    class PandaVOIP;
-}
 
-class PandaVOIP : public QMainWindow {
-    Q_OBJECT
+class PandaVOIP {
+    public:
+        PandaVOIP();
 
     private:
-        void setupPandaVOIP();
-        void loginPopup();
-
-        Ui::PandaVOIP *ui;
-        QListWidget* general_list;
         VoipController* voip_controller;
-        Account *account = NULL;
-        Settings *settings = NULL;
-
-    public:
-        explicit PandaVOIP(QWidget *parent = 0);
-        ~PandaVOIP();
-        void newMessage(QString, QString);
-
-    public slots:
-        void onMessageBoxReturned();
-        void onSettingsClicked();
-        void onCloseClicked();
-        void onMaximizeClicked();
-        void onMinimizeClicked();
-        void updateVoiceUsers(std::vector<QString>);
-        void updateChatUsers(std::vector<QString>);
 };
 
-#endif // PandaVOIP_H
+#endif // PANDAVOIP_H

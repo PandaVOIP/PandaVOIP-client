@@ -15,12 +15,11 @@ using namespace std;
 
 #define SERVER_IP "127.0.0.1"
 
-VoipController::VoipController(PandaVOIP* gui){
-    this->gui = gui;
+VoipController::VoipController(){
     // get client ID to use for transmission
     this->loadOrCreateClientId();
-    command_conn = NULL;
-    voice_conn = NULL;
+    command_conn = nullptr;
+    voice_conn = nullptr;
 
     voipIO = new VoipAudioIODevice();
     voipIO->open(QIODevice::ReadWrite);
@@ -53,7 +52,7 @@ bool VoipController::controlConnect(){
 
 void VoipController::receive_text_message(QJsonObject data){
     // give message to GUI
-    this->gui->newMessage(
+    emit onNewMessage(
         data["message"].toObject()["sender_id"].toString(),
         data["message"].toObject()["text"].toString()
     );
@@ -61,7 +60,7 @@ void VoipController::receive_text_message(QJsonObject data){
 
 bool VoipController::send_text_message(QString message){
     // cannot send if not connected
-    if (command_conn == NULL){
+    if (command_conn == nullptr){
         return false;
     }
 
@@ -79,11 +78,11 @@ bool VoipController::send_text_message(QString message){
 // this is a toggle function, either connects or disconnects to voice
 bool VoipController::connectVoice(){   
     // cannot conntect to voice without already being connected to command server
-    if (command_conn == NULL){
+    if (command_conn == nullptr){
         return false;
     }
     // conntect to voice if not already connected
-    if (voice_conn == NULL){
+    if (voice_conn == nullptr){
         command_conn->connect_to_voice();
         voice_conn = new VoipUDPSocket(SERVER_IP, 50038);
         voipIO->setVoiceConn(voice_conn);
@@ -92,7 +91,7 @@ bool VoipController::connectVoice(){
     } else {
         command_conn->disconnect_from_voice();
         delete voice_conn;
-        voice_conn = NULL;
+        voice_conn = nullptr;
         voipIO->setVoiceConn(voice_conn);
         return true;
     }
@@ -108,7 +107,7 @@ void VoipController::updateChatUsers(QJsonObject data){
     for (i = 0; i < json_users.size(); i++){
         users.push_back(json_users.at(i).toString());
     }
-    gui->updateChatUsers(users);
+    emit updateChatUsers(users);
 }
 
 // updates the user GUI with a list of QStrings
@@ -121,6 +120,6 @@ void VoipController::updateVoiceUsers(QJsonObject data){
     for (i = 0; i < json_users.size(); i++){
         users.push_back(json_users.at(i).toString());
     }
-    gui->updateVoiceUsers(users);
+    emit updateVoiceUsers(users);
 
 }

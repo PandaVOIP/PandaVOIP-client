@@ -1,4 +1,4 @@
-#include "messagebox.h"
+#include "messagebox_ui.h"
 #include <QTextEdit>
 #include <QKeyEvent>
 

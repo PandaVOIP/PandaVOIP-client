@@ -1,6 +1,6 @@
-#include "account.h"
+#include "account_ui.h"
 #include "ui_account.h"
-#include "pandavoip.h"
+#include "pandavoip_ui.h"
 #include <iostream>
 
 Account::Account(QWidget *parent) : QWidget(parent), ui(new Ui::Account) {

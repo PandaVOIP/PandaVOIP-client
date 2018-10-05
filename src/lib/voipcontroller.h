@@ -8,35 +8,39 @@
 
 class VoipTCPSocket;
 class VoipAudioIODevice;
-class PandaVOIP;
+class PandaVOIPUI;
 
-class VoipController : public QObject
-{
+class VoipController : public QObject {
     Q_OBJECT
-public:
-    VoipController(PandaVOIP*);
-    bool controlConnect();
-    void receive_text_message(QJsonObject);
-    bool send_text_message(QString);
-    void updateChatUsers(QJsonObject);
-    void updateVoiceUsers(QJsonObject);
 
-public slots:
-    bool connectVoice();
+    private:
+        void loadOrCreateClientId();
 
-private:
-    void loadOrCreateClientId();
+        int clientID;
+        QAudioInput* audioInput;
+        VoipAudioIODevice* voipIO;
+        VoipTCPSocket* command_conn;
+        VoipUDPSocket* voice_conn;
 
-    int clientID;
-    PandaVOIP* gui;
-    QAudioInput* audioInput;
-    VoipAudioIODevice* voipIO;
-    VoipTCPSocket* command_conn;
-    VoipUDPSocket* voice_conn;
+    public:
+        VoipController();
+        bool controlConnect();
+        void receive_text_message(QJsonObject);
+        bool send_text_message(QString);
+        void updateChatUsers(QJsonObject);
+        void updateVoiceUsers(QJsonObject);
+
+    public slots:
+        bool connectVoice();
+
+    signals:
+        void updateVoiceUsers(std::vector<QString>);
+        void updateChatUsers(std::vector<QString>);
+        void onNewMessage(QString, QString);
 };
 
 #include "voipaudioiodevice.h"
 #include "voiptcpsocket.h"
-#include "pandavoip.h"
+#include "pandavoip_ui.h"
 
 #endif // VOIPCONTROLLER_H

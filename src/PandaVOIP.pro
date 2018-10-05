@@ -26,30 +26,32 @@ INCLUDEPATH += "lib"
 
 SOURCES += \
     main.cpp \
-    messagebox.cpp \
-    pandavoip.cpp \
-    settings.cpp \
-    account.cpp \
-    menu.cpp \
     lib/opusutil.cpp \
     lib/voipaudioiodevice.cpp \
     lib/voipcontroller.cpp \
     lib/voiptcpsocket.cpp \
     lib/voipudpsocket.cpp \
-    servernavigation.cpp
+    servernavigation.cpp \
+    pandavoip_ui.cpp \
+    settings_ui.cpp \
+    account_ui.cpp \
+    menu_ui.cpp \
+    messagebox_ui.cpp \
+    pandavoip.cpp
 
 HEADERS += \
-    messagebox.h \
-    pandavoip.h \
-    settings.h \
-    account.h \
-    menu.h \
     lib/opusutil.h \
     lib/voipaudioiodevice.h \
     lib/voipcontroller.h \
     lib/voiptcpsocket.h \
     lib/voipudpsocket.h \
-    servernavigation.h
+    servernavigation.h \
+    pandavoip_ui.h \
+    settings_ui.h \
+    account_ui.h \
+    menu_ui.h \
+    messagebox_ui.h \
+    pandavoip.h
 
 FORMS += \
     pandavoip.ui \

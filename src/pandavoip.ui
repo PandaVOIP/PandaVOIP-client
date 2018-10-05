@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PandaVOIP</class>
- <widget class="QMainWindow" name="PandaVOIP">
+ <class>PandaVOIPUI</class>
+ <widget class="QMainWindow" name="PandaVOIPUI">
   <property name="geometry">
    <rect>
     <x>0</x>
