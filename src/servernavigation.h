@@ -10,8 +10,7 @@ struct server_node {
     QListWidget *user_list;
 };
 
-class ServerNavigation : public QWidget
-{
+class ServerNavigation : public QWidget {
     Q_OBJECT
 
     private:

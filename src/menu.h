@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-class Menu : public QWidget{
+class Menu : public QWidget {
     Q_OBJECT
 
     private:

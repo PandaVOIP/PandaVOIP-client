@@ -7,7 +7,7 @@ namespace Ui {
     class Account;
 }
 
-class Account : public QWidget{
+class Account : public QWidget {
     Q_OBJECT
 
     private:
@@ -19,7 +19,7 @@ class Account : public QWidget{
         void closeEvent(QCloseEvent *e);
 
     public:
-        explicit Account(QWidget *parent = 0);
+        explicit Account(QWidget *parent);
         ~Account();
 
     private slots:

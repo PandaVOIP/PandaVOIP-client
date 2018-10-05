@@ -3,9 +3,8 @@
 #include <QListWidget>
 #include <QLayout>
 
-ServerNavigation::ServerNavigation(QWidget *parent) : QWidget(parent)
-{
-    this->server_navigation = (server_node *)malloc(sizeof(struct server_node));
+ServerNavigation::ServerNavigation(QWidget *parent) : QWidget(parent) {
+    this->server_navigation = reinterpret_cast<server_node *>(malloc(sizeof(struct server_node)));
 }
 
 void ServerNavigation::newServerNode(const QString &node_name, QLayout *parent_layout, QWidget *parent) {

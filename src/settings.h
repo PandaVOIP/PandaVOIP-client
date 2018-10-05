@@ -7,14 +7,14 @@ namespace Ui {
     class Settings;
 }
 
-class Settings : public QWidget{
+class Settings : public QWidget {
     Q_OBJECT
 
     private:
         Ui::Settings *ui;
 
     public:
-        explicit Settings(QWidget *parent = 0);
+        explicit Settings(QWidget *parent = nullptr);
         ~Settings();
 };
 

@@ -2,7 +2,7 @@
 #define MESSAGEBOX_H
 #include <QTextEdit>
 
-class MessageBox : public QTextEdit{
+class MessageBox : public QTextEdit {
     Q_OBJECT
 
     private:
