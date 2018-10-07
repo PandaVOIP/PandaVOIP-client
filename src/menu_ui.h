@@ -1,6 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
-
+#ifndef MENUUI_H
+#define MENUUI_H
 #include <QWidget>
 
 class Menu : public QWidget {
@@ -21,4 +20,4 @@ class Menu : public QWidget {
         explicit Menu(QWidget *parent = nullptr);
 };
 
-#endif // MENU_H
+#endif // MENUUI_H

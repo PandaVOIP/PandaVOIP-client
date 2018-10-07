@@ -1,5 +1,5 @@
-#ifndef MESSAGEBOX_H
-#define MESSAGEBOX_H
+#ifndef MESSAGEBOXUI_H
+#define MESSAGEBOXUI_H
 #include <QTextEdit>
 
 class MessageBox : public QTextEdit {
@@ -16,4 +16,4 @@ class MessageBox : public QTextEdit {
         void onMessageBoxReturned();
 };
 
-#endif // MESSAGEBOX_H
+#endif // MESSAGEBOXUI_H

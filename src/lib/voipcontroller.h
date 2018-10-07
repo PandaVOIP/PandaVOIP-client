@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include <QAudioInput>
-
 #include "voipudpsocket.h"
+#include "voipaudioiodevice.h"
+#include "voiptcpsocket.h"
 
 class VoipTCPSocket;
 class VoipAudioIODevice;
@@ -38,9 +39,5 @@ class VoipController : public QObject {
         void updateChatUsers(std::vector<QString>);
         void onNewMessage(QString, QString);
 };
-
-#include "voipaudioiodevice.h"
-#include "voiptcpsocket.h"
-#include "pandavoip_ui.h"
 
 #endif // VOIPCONTROLLER_H

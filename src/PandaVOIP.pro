@@ -31,7 +31,6 @@ SOURCES += \
     lib/voipcontroller.cpp \
     lib/voiptcpsocket.cpp \
     lib/voipudpsocket.cpp \
-    servernavigation.cpp \
     pandavoip_ui.cpp \
     settings_ui.cpp \
     account_ui.cpp \
@@ -45,7 +44,6 @@ HEADERS += \
     lib/voipcontroller.h \
     lib/voiptcpsocket.h \
     lib/voipudpsocket.h \
-    servernavigation.h \
     pandavoip_ui.h \
     settings_ui.h \
     account_ui.h \

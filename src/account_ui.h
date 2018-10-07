@@ -1,6 +1,5 @@
-#ifndef ACCOUNT_H
-#define ACCOUNT_H
-
+#ifndef ACCOUNTUI_H
+#define ACCOUNTUI_H
 #include <QWidget>
 
 namespace Ui {
@@ -15,9 +14,6 @@ class Account : public QWidget {
 
         void setupAccountScreen();
 
-    protected:
-        void closeEvent(QCloseEvent *e);
-
     public:
         explicit Account(QWidget *parent);
         ~Account();
@@ -27,4 +23,4 @@ class Account : public QWidget {
         void onLoginClicked();
 };
 
-#endif // ACCOUNT_H
+#endif // ACCOUNTUI_H

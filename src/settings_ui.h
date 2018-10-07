@@ -1,6 +1,5 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
-
+#ifndef SETTINGSUI_H
+#define SETTINGSUI_H
 #include <QWidget>
 
 namespace Ui {
@@ -18,4 +17,4 @@ class Settings : public QWidget {
         ~Settings();
 };
 
-#endif // SETTINGS_H
+#endif // SETTINGSUI_H

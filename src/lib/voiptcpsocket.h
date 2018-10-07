@@ -7,7 +7,7 @@
 #include <QAbstractSocket>
 #include <QJsonObject>
 
-#include "voipcontroller.h"
+class VoipController;
 
 class VoipTCPSocket : public QObject
 {

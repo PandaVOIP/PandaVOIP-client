@@ -184,12 +184,11 @@
     <item>
      <widget class="QWidget" name="main_widget" native="true">
       <property name="styleSheet">
-       <string notr="true">#server_navigation_area{
-
+       <string notr="true">#channel_navigation{
 	border: none;
 }
 
-#server_navigation{
+#channels{
 	background-color: rgb(50, 50, 50);
 }</string>
       </property>
@@ -210,7 +209,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QScrollArea" name="server_navigation_area">
+        <widget class="QScrollArea" name="channel_navigation">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -232,7 +231,7 @@
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
          </property>
-         <widget class="QWidget" name="server_navigation">
+         <widget class="QWidget" name="channels">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -247,11 +246,11 @@
 	color: white;
 }
 
-#server_navigation &gt; QWidget{
+#channels &gt; QWidget{
 	border-top: 1px solid #6f6f6f;
 }
 
-#server_navigation_layout{
+#channel_layout{
 	vertical-align: top;
 }
 
@@ -275,7 +274,7 @@ QListWidget{
 	margin-left: 20px;
 }</string>
           </property>
-          <layout class="QVBoxLayout" name="server_navigation_layout">
+          <layout class="QVBoxLayout" name="channel_layout">
            <property name="spacing">
             <number>0</number>
            </property>
@@ -296,7 +295,7 @@ QListWidget{
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="chat_window" native="true">
+        <widget class="QWidget" name="chat" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -384,12 +383,12 @@ QListWidget{
   <customwidget>
    <class>MessageBox</class>
    <extends>QTextEdit</extends>
-   <header>messagebox.h</header>
+   <header>messagebox_ui.h</header>
   </customwidget>
   <customwidget>
    <class>Menu</class>
    <extends>QWidget</extends>
-   <header>menu.h</header>
+   <header>menu_ui.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

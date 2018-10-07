@@ -1,5 +1,5 @@
 #include "voiptcpsocket.h"
-
+#include "voipcontroller.h"
 #include <QHostAddress>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -10,8 +10,7 @@ using namespace std;
 #define BUFFER_SIZE 8192
 
 // command server class
-VoipTCPSocket::VoipTCPSocket(VoipController* controller, QString ip, quint16 port, int client_id)
-{
+VoipTCPSocket::VoipTCPSocket(VoipController* controller, QString ip, quint16 port, int client_id) {
     // reference to the parent
     this->controller = controller;
     this->tcp_socket = new QTcpSocket;
@@ -38,15 +37,15 @@ VoipTCPSocket::VoipTCPSocket(VoipController* controller, QString ip, quint16 por
 
 }
 
-void VoipTCPSocket::tcp_connected(){
+void VoipTCPSocket::tcp_connected() {
 
 }
 
-void VoipTCPSocket::tcp_disconnected(){
+void VoipTCPSocket::tcp_disconnected() {
 
 }
 
-void VoipTCPSocket::tcp_error(QAbstractSocket::SocketError error){
+void VoipTCPSocket::tcp_error(QAbstractSocket::SocketError error) {
     Q_UNUSED(error);
 }
 
@@ -71,7 +70,7 @@ void VoipTCPSocket::send_data(QJsonObject json_data){
     this->tcp_socket->write(data, BUFFER_SIZE);
 }
 
-void VoipTCPSocket::read_data(){
+void VoipTCPSocket::read_data() {
     // all transmissions are preceded by the length, a 10 characater 0 padding number
     char read_size[11];
     // actual data buffer
@@ -114,7 +113,7 @@ void VoipTCPSocket::read_data(){
     }
 }
 
-void VoipTCPSocket::connect_to_voice(){
+void VoipTCPSocket::connect_to_voice() {
     QJsonObject json_message{
         {"command", "voice connect"}
     };
@@ -122,11 +121,11 @@ void VoipTCPSocket::connect_to_voice(){
     this->send_data(json_message);
 }
 
-void VoipTCPSocket::send_command(QJsonObject message){
+void VoipTCPSocket::send_command(QJsonObject message) {
     this->send_data(message);
 }
 
-void VoipTCPSocket::disconnect_from_voice(){
+void VoipTCPSocket::disconnect_from_voice() {
     QJsonObject json_message{
         {"command", "voice disconnect"}
     };
